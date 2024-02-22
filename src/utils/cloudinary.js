@@ -18,6 +18,7 @@ const uploadOnCloudinary = async (localFilePath) => {
         })
         // file has been uploaded successfully
         console.log("File is uploaded on cloudinary", response.url)
+        fs.unlinkSync(localFilePath)
         return response;
     } catch (error) {
         fs.unlinkSync(localFilePath);//delete local copy of the image after uploading it to clodinary
@@ -29,3 +30,5 @@ const uploadOnCloudinary = async (localFilePath) => {
 cloudinary.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg",
   { public_id: "olympic_flag" }, 
   function(error, result) {console.log(result); });
+
+export {uploadOnCloudinary}
